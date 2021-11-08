@@ -16,7 +16,18 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
   "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "/*": [
+        "dist/*"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
@@ -31,16 +42,6 @@
     "test:watch": "jest --watch"
   },
   "license": "MIT",
-  "exports": {
-    "./*": "./dist/*.js"
-  },
-  "typesVersions": {
-    "*": {
-      "/*": [
-        "dist/*"
-      ]
-    }
-  },
   "dependencies": {
     "ajv": "^8.6.3"
   },
