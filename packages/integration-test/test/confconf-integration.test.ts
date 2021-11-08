@@ -1,4 +1,4 @@
-import { confconf, envConfig, staticConfig } from "@confconf/confconf";
+import { confconf, envConfig, staticConfig, devOnlyConfig } from "@confconf/confconf";
 
 describe("Integration tests", () => {
   it("loads static config", async () => {
@@ -59,6 +59,31 @@ describe("Integration tests", () => {
     expect(config).toEqual({
       a: "hello",
       b: 10,
+    });
+  });
+
+  it("loads dev only config", async () => {
+    process.env.NODE_ENV = "development";
+
+    const configLoader = confconf<{
+      a: string;
+    }>({
+      schema: {
+        type: "object",
+        properties: {
+          a: { type: "string" },
+        },
+      },
+      providers: [
+        devOnlyConfig({
+          a: "hello",
+        }),
+      ],
+    });
+
+    const config = await configLoader.loadAndValidate();
+    expect(config).toEqual({
+      a: "hello",
     });
   });
 });

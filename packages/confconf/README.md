@@ -222,6 +222,7 @@ confconf is bundled with the following providers:
 
 - envConfig : Load configuration from the environment variables
 - staticConfig : Provide configuration using static value
+- devOnlyConfig : Provide a static value configuration that is loaded only when NODE_ENV=development
 
 In addition these are coming available soon:
 
