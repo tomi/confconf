@@ -1,6 +1,6 @@
-import { mergeDeep } from "./deepMerge";
+import { mergeDeep } from "../utils/deepMerge";
 
-import type { ConfigProvider } from "./configProvider";
+import type { ConfigProvider } from "../configProvider";
 
 export type ConfigStructure =
   | string

@@ -1,4 +1,4 @@
-import type { ConfigProvider } from "./configProvider";
+import type { ConfigProvider } from "../configProvider";
 
 /**
  * A configuration provider that provides a static configuration, given

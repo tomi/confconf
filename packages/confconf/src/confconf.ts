@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 
-import { deepFreeze } from "./deepFreeze";
-import { mergeDeep } from "./deepMerge";
+import { deepFreeze } from "./utils/deepFreeze";
+import { mergeDeep } from "./utils/deepMerge";
 import { ValidationError } from "./ValidationError";
 
 import type { ConfigProvider } from "./configProvider";

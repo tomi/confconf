@@ -1,4 +1,4 @@
-import { deepFreeze } from "../src/deepFreeze";
+import { deepFreeze } from "../src/utils/deepFreeze";
 
 describe("deepFreeze", () => {
   const obj = {
