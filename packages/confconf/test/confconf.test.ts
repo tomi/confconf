@@ -94,7 +94,7 @@ describe("confconf", () => {
       });
 
       await expect(() => config.loadAndValidate()).rejects.toThrowErrorMatchingInlineSnapshot(
-        `"Configuration validation failed"`,
+        `"Configuration validation failed: must have required property 'b'"`,
       );
     });
   });
