@@ -1,0 +1,13 @@
+{
+  "name": "@confconf/integration-test",
+  "version": "1.0.0",
+  "description": "NPM module usage tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch"
+  },
+  "author": "Tomi Turtiainen <tomi.turtiainen@gmail.com>",
+  "license": "MIT"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@confconf/confconf",
+  "version": "1.0.0",
+  "description": "A node.js configuration manager",
+  "keywords": [
+    "conf",
+    "config",
+    "configuration",
+    "node-config",
+    "config-node",
+    "schema",
+    "validation",
+    "env",
+    "environment",
+    "json"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Tomi Turtiainen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomi/confconf.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch"
+  },
+  "license": "MIT",
+  "exports": {
+    "./*": "./dist/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "/*": [
+        "dist/*"
+      ]
+    }
+  },
+  "dependencies": {
+    "ajv": "^8.6.3"
+  },
+  "devDependencies": {
+    "@sinclair/typebox": "^0.20.5",
+    "@types/node": "^16.11.6",
+    "purify-ts": "^1.1.0"
+  }
+}
