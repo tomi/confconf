@@ -119,6 +119,26 @@ describe("confconf", () => {
         b: "later",
       });
     });
+
+    it("undefined values are ignored", async () => {
+      const config = confconf({
+        schema: defaultSchema,
+        providers: [
+          staticConfig({
+            a: "hello",
+            b: "config",
+          }),
+          staticConfig({
+            b: undefined,
+          }),
+        ],
+      });
+
+      expect(await config.loadAndValidate()).toEqual({
+        a: "hello",
+        b: "config",
+      });
+    });
   });
 
   describe("type coercion", () => {

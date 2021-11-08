@@ -21,7 +21,7 @@ export function mergeDeep<T>(target: any, ...sources: any[]): T {
       if (isObject(source[key])) {
         if (!target[key]) Object.assign(target, { [key]: {} });
         mergeDeep(target[key], source[key]);
-      } else {
+      } else if (source[key] !== undefined) {
         Object.assign(target, { [key]: source[key] });
       }
     }
