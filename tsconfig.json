@@ -3,6 +3,9 @@
   "references": [
     {
       "path": "./packages/confconf/tsconfig.ref.json"
+    },
+    {
+      "path": "./packages/aws-secrets-manager/tsconfig.ref.json"
     }
   ]
 }
