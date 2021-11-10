@@ -1,0 +1,48 @@
+{
+  "name": "@confconf/aws-secrets-manager",
+  "version": "1.0.0",
+  "description": "AWS Secrets Manager provider for confconf",
+  "keywords": [
+    "aws-secrets-manager",
+    "secrets-manager",
+    "conf",
+    "config",
+    "configuration"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "/*": [
+        "dist/*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Tomi Turtiainen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomi/confconf.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.40.0",
+    "@confconf/confconf": "^1.1.1"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomi/confconf/issues"
+  },
+  "homepage": "https://github.com/tomi/confconf/tree/main/packages/aws-secrets-manager"
+}
