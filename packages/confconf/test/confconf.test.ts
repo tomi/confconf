@@ -2,6 +2,7 @@ import { Type } from "@sinclair/typebox";
 
 import { confconf, staticConfig } from "../src";
 
+import type { ConfigProvider } from "../src";
 import type { Static } from "@sinclair/typebox";
 
 describe("confconf", () => {
@@ -264,6 +265,32 @@ describe("confconf", () => {
       expect(config).toEqual({
         a: "2nd",
         b: "3rd",
+      });
+    });
+  });
+
+  describe("error cases", () => {
+    const failProvider: ConfigProvider = {
+      load: () => {
+        throw new Error();
+      },
+    };
+
+    it("doesn't fail if single provider loading fails", async () => {
+      const config = confconf({
+        schema: defaultSchema,
+        providers: [
+          staticConfig({
+            a: "hello",
+            b: "config",
+          }),
+          failProvider,
+        ],
+      });
+
+      expect(await config.loadAndValidate()).toEqual({
+        a: "hello",
+        b: "config",
       });
     });
   });

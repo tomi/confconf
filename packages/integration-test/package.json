@@ -9,5 +9,8 @@
     "test:watch": "jest --watch"
   },
   "author": "Tomi Turtiainen <tomi.turtiainen@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.41.0"
+  }
 }

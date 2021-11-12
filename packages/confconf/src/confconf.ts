@@ -56,7 +56,9 @@ class Confconf<TConfig> {
   }
 
   public async loadAndValidate(): Promise<TConfig> {
-    const providedConfigs = await Promise.all(this.providers.map((p) => p.load()));
+    const providedConfigs = await Promise.all(
+      this.providers.map((p) => this.loadProviderConfig(p)),
+    );
 
     const mergedConfig = mergeDeep({}, ...providedConfigs);
 
@@ -65,6 +67,14 @@ class Confconf<TConfig> {
     }
 
     throw new ValidationError(this.validator.errors ?? []);
+  }
+
+  private async loadProviderConfig(provider: ConfigProvider) {
+    try {
+      return await provider.load();
+    } catch (error) {
+      console.error(`Failed to load config from provider ${provider}: ${error}`);
+    }
   }
 }
 

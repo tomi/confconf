@@ -1,5 +1,6 @@
+import { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
 import { awsSecretsManagerConfig } from "@confconf/aws-secrets-manager";
-import { confconf } from "@confconf/confconf";
+import { confconf, staticConfig } from "@confconf/confconf";
 
 describe("Integration tests", () => {
   it("loads aws secrets manager config", async () => {
@@ -24,6 +25,7 @@ describe("Integration tests", () => {
           a: { type: "string" },
           b: { type: "number" },
         },
+        required: ["a", "b"],
       },
       providers: [
         awsSecretsManagerConfig({
@@ -40,6 +42,41 @@ describe("Integration tests", () => {
     expect(config).toEqual({
       a: "hello",
       b: 10,
+    });
+  });
+
+  it("doesn't fail even if aws secrets manager can't load a secret", async () => {
+    const client = new SecretsManagerClient({
+      credentials: {
+        accessKeyId: "dummyvalue",
+        secretAccessKey: "dummyvalue",
+      },
+    });
+
+    const configLoader = confconf<any>({
+      schema: {
+        type: "object",
+        properties: {
+          a: { type: "string" },
+        },
+        required: ["a"],
+      },
+      providers: [
+        staticConfig({
+          a: "hello",
+        }),
+        awsSecretsManagerConfig({
+          client,
+          secretToLoad: {
+            secretId: "my/secret",
+          },
+        }),
+      ],
+    });
+
+    const config = await configLoader.loadAndValidate();
+    expect(config).toEqual({
+      a: "hello",
     });
   });
 });
