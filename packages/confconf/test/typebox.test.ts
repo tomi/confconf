@@ -1,19 +1,16 @@
 import { Type } from "@sinclair/typebox";
 
-import { confconf, staticConfig } from "../src";
-
-import type { Static } from "@sinclair/typebox";
+import { staticConfig } from "../src";
+import { typeboxConfconf } from "./testUtils";
 
 const schema = Type.Object({
   a: Type.String(),
   b: Type.Number(),
 });
 
-type Config = Static<typeof schema>;
-
 describe("Usage with typebox", () => {
   it("works with typebox", async () => {
-    const configLoader = confconf<Config>({
+    const configLoader = typeboxConfconf({
       schema,
       providers: [
         staticConfig({
@@ -28,5 +25,9 @@ describe("Usage with typebox", () => {
       a: "hello",
       b: 10,
     });
+
+    // typescript checks
+    config.a;
+    config.b;
   });
 });

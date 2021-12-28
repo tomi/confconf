@@ -6,7 +6,7 @@ module.exports = {
     ".eslintrc.js",
   ],
   parserOptions: {
-    project: ["../tsconfig.test.json"],
+    project: ["./tsconfig.json"],
     tsconfigRootDir: __dirname,
   },
   extends: ["plugin:jest/recommended", "plugin:jest/style"],

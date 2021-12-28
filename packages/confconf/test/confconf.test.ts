@@ -1,21 +1,26 @@
-import { Type } from "@sinclair/typebox";
-
 import { confconf, staticConfig } from "../src";
 
 import type { ConfigProvider } from "../src";
-import type { Static } from "@sinclair/typebox";
+import type { JSONSchemaType } from "ajv";
+
+type Config = {
+  a: string;
+  b: string;
+};
+
+const defaultSchema: JSONSchemaType<Config> = {
+  type: "object",
+  properties: {
+    a: { type: "string" },
+    b: { type: "string" },
+  },
+  required: ["a", "b"],
+};
 
 describe("confconf", () => {
-  const defaultSchema = Type.Object({
-    a: Type.String(),
-    b: Type.String(),
-  });
-
-  type Config = Static<typeof defaultSchema>;
-
   describe("basic functionality", () => {
     it("loads and validates config", async () => {
-      const config = confconf({
+      const config = confconf<Config>({
         schema: defaultSchema,
         providers: [
           staticConfig({
@@ -32,12 +37,20 @@ describe("confconf", () => {
     });
 
     it("loads values from all providers when new ones are added", async () => {
-      const configLoader = confconf({
-        schema: Type.Object({
-          a: Type.String(),
-          b: Type.String(),
-          c: Type.String(),
-        }),
+      const configLoader = confconf<{
+        a: string;
+        b: string;
+        c: string;
+      }>({
+        schema: {
+          type: "object",
+          properties: {
+            a: { type: "string" },
+            b: { type: "string" },
+            c: { type: "string" },
+          },
+          required: ["a", "b", "c"],
+        },
         providers: [
           staticConfig({
             a: "hello",
@@ -144,12 +157,19 @@ describe("confconf", () => {
 
   describe("type coercion", () => {
     describe("string to number", () => {
-      const schemaWithNumber = Type.Object({
-        a: Type.Number(),
-      });
+      type SchemaWithNumber = {
+        a: number;
+      };
+      const schemaWithNumber: JSONSchemaType<SchemaWithNumber> = {
+        type: "object",
+        properties: {
+          a: { type: "number" },
+        },
+        required: ["a"],
+      };
 
       it("coerces an integer", async () => {
-        const config = confconf({
+        const config = confconf<SchemaWithNumber>({
           schema: schemaWithNumber,
           providers: [
             staticConfig({
@@ -193,9 +213,16 @@ describe("confconf", () => {
     });
 
     describe("string to boolean", () => {
-      const schemaWithBoolean = Type.Object({
-        a: Type.Boolean(),
-      });
+      type SchemaWithBoolean = {
+        a: boolean;
+      };
+      const schemaWithBoolean: JSONSchemaType<SchemaWithBoolean> = {
+        type: "object",
+        properties: {
+          a: { type: "boolean" },
+        },
+        required: ["a"],
+      };
 
       it("coerces true", async () => {
         const config = confconf({
@@ -231,7 +258,7 @@ describe("confconf", () => {
 
   describe("configuration freezing", () => {
     it("the configuration is frozen by default when it's loaded", async () => {
-      const configLoader = confconf<Config>({
+      const configLoader = confconf({
         schema: defaultSchema,
         providers: [
           staticConfig({
@@ -247,7 +274,7 @@ describe("confconf", () => {
     });
 
     it("is not frozen if specified so", async () => {
-      const configLoader = confconf<Config>({
+      const configLoader = confconf({
         freezeConfig: false,
         schema: defaultSchema,
         providers: [

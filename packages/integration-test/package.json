@@ -11,6 +11,8 @@
   "author": "Tomi Turtiainen <tomi.turtiainen@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@aws-sdk/client-secrets-manager": "^3.41.0"
+    "@aws-sdk/client-secrets-manager": "^3.41.0",
+    "@sinclair/typebox": "^0.23.2",
+    "purify-ts": "^1.1.0"
   }
 }

@@ -7,6 +7,9 @@
     "rootDir": "./test" /* Specify the root folder within your source files. */,
 
     /* Emit */
-    "outDir": "./dist" /* Specify an output folder for all emitted files. */
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+
+    "declaration": false,
+    "declarationMap": false
   }
 }

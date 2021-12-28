@@ -1,5 +1,7 @@
 # confconf
 
+`confconf` is an opinionated library for loading and validating application configuration.
+
 ## Features
 
 - Loading and merging: configuration is loaded from a number of configuration providers and merged
@@ -25,8 +27,13 @@ The library is used as follows:
 ### With [TypeBox](https://github.com/sinclairzx81/typebox)
 
 ```ts
-import { confconf, envConfig } from "@confconf/confconf";
-import { Static, Type } from "@sinclair/typebox";
+import { confconf, envConfig, ConfconfOpts } from "@confconf/confconf";
+import { Static, Type, TSchema as TTypeboxSchema } from "@sinclair/typebox";
+
+// This integrates typebox with confconf. This way the configuration
+// type can be inferred directly from the schema.
+export const typeboxConfconf = <TSchema extends TTypeboxSchema>(opts: ConfconfOpts<TSchema>) =>
+  confconf<Static<TSchema>, TSchema>(opts);
 
 // Define a schema
 const configSchema = Type.Object({
@@ -40,7 +47,7 @@ const configSchema = Type.Object({
 type Config = Static<typeof configSchema>;
 
 // Create the configuration loader
-const configLoader = confconf<Config>({
+const configLoader = typeboxConfconf({
   schema: configSchema,
   providers: [
     // Load from env variables
@@ -61,11 +68,22 @@ const configLoader = confconf<Config>({
 const config = await configLoader.loadAndValidate();
 ```
 
-### With purify-ts
+### With [purify-ts](https://gigobyte.github.io/purify/)
 
 ```ts
-import { confconf, envConfig } from "@confconf/confconf";
+import { confconf, envConfig, ConfconfOpts } from "@confconf/confconf";
 import { Codec, number, string, GetType } from "purify-ts";
+import type { JSONSchema6 } from "json-schema";
+
+// This integrates purify-ts with confconf. This way the configuration
+// type can be inferred directly from the codec.
+export type PurifyConfconfOpts<T> = ConfconfOpts<Codec<T>>;
+
+export const purifyConfconf = <T>(opts: PurifyConfconfOpts<T>) =>
+  confconf<GetType<Codec<T>>, JSONSchema6>({
+    ...opts,
+    schema: opts.schema.schema(),
+  });
 
 // Define a schema
 const configSchema = Codec.interface({
@@ -79,7 +97,7 @@ const configSchema = Codec.interface({
 type Config = GetType<typeof configSchema>;
 
 // Create the configuration loader
-const configLoader = confconf<Config>({
+const configLoader = purifyConfconf({
   schema: configSchema,
   providers: [
     // Load from env variables
@@ -105,34 +123,31 @@ const config = await configLoader.loadAndValidate();
 ```ts
 import { confconf, envConfig } from "@confconf/confconf";
 
-// Define a schema
-const configSchema = {
-  type: "object",
-  properties: {
-    port: { type: "number" },
-    db: {
-      type: "object",
-      properties: {
-        host: { type: "string" },
-        name: { type: "string" },
-      },
-      required: ["host", "name"]
-    }),
-  },
-  required: ["port", "db"]
-});
-
 type Config = {
   port: number;
   db: {
     host: string;
     name: string;
-  }
-}
+  };
+};
 
 // Create the configuration loader
 const configLoader = confconf<Config>({
-  schema: configSchema,
+  schema: {
+    type: "object",
+    properties: {
+      port: { type: "number" },
+      db: {
+        type: "object",
+        properties: {
+          host: { type: "string" },
+          name: { type: "string" },
+        },
+        required: ["host", "name"],
+      },
+    },
+    required: ["port", "db"],
+  },
   providers: [
     // Load from env variables
     envConfig({

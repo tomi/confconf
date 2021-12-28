@@ -1,22 +1,15 @@
 import { Codec, number, string } from "purify-ts";
 
-import { confconf, staticConfig } from "../src";
-
-import type { GetType } from "purify-ts";
-
-const codec = Codec.interface({
-  a: string,
-  b: number,
-});
-
-const schema = codec.schema();
-
-type Config = GetType<typeof codec>;
+import { staticConfig } from "../src";
+import { purifyConfconf } from "./testUtils";
 
 describe("Usage with purify-ts", () => {
   it("works with purify-ts", async () => {
-    const configLoader = confconf<Config>({
-      schema,
+    const configLoader = purifyConfconf({
+      schema: Codec.interface({
+        a: string,
+        b: number,
+      }),
       providers: [
         staticConfig({
           a: "hello",
@@ -30,5 +23,9 @@ describe("Usage with purify-ts", () => {
       a: "hello",
       b: 10,
     });
+
+    // typescript checks
+    config.a;
+    config.b;
   });
 });
