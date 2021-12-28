@@ -5,6 +5,7 @@
     "./packages/*"
   ],
   "scripts": {
+    "commit": "cz",
     "test": "npm run test --workspaces",
     "test:ci": "npm run test:ci --workspaces",
     "clean": "tsc --build --clean",
@@ -17,9 +18,12 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
+    "commitizen": "^4.2.4",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
