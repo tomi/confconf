@@ -5,7 +5,7 @@ import { mergeDeep } from "./utils/deepMerge";
 import { ValidationError } from "./ValidationError";
 
 import type { ConfigProvider } from "./configProvider";
-import type { Schema, ValidateFunction } from "ajv";
+import type { Schema, ValidateFunction, JSONSchemaType } from "ajv";
 
 const ajv = new Ajv({
   strict: true,
@@ -19,11 +19,11 @@ const ajv = new Ajv({
   "modifier",
 ]);
 
-export interface ConfconfOpts {
+export interface ConfconfOpts<TSchema extends Schema> {
   /**
    * Schema against which the loaded configuration is validated
    */
-  schema: Schema;
+  schema: TSchema;
 
   /**
    * List of providers from which the configuration is loaded from
@@ -39,12 +39,12 @@ export interface ConfconfOpts {
   freezeConfig?: boolean;
 }
 
-class Confconf<TConfig> {
+class Confconf<TConfig = any, TSchema = any> {
   private readonly freeze: boolean;
   private readonly providers: ConfigProvider[];
   private readonly validator: ValidateFunction<TConfig>;
 
-  constructor(opts: ConfconfOpts) {
+  constructor(opts: ConfconfOpts<TSchema>) {
     this.freeze = opts.freezeConfig ?? true;
     this.providers = opts.providers;
 
@@ -78,7 +78,12 @@ class Confconf<TConfig> {
   }
 }
 
+export type ConfconfFn = {
+  <T = any>(opts: ConfconfOpts<JSONSchemaType<T>>): Confconf<T, JSONSchemaType<T>>;
+  <TConfig, TSchema extends Schema>(opts: ConfconfOpts<TSchema>): Confconf<TConfig, TSchema>;
+};
+
 /**
  * Creates a new instance of confconf
  */
-export const confconf = <TConfig>(opts: ConfconfOpts) => new Confconf<TConfig>(opts);
+export const confconf: ConfconfFn = (opts: any) => new Confconf(opts);

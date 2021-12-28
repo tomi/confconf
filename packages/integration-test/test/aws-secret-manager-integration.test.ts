@@ -1,6 +1,9 @@
 import { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
 import { awsSecretsManagerConfig } from "@confconf/aws-secrets-manager";
-import { confconf, staticConfig } from "@confconf/confconf";
+import { staticConfig } from "@confconf/confconf";
+import { Type } from "@sinclair/typebox";
+
+import { typeboxConfconf } from "./testUtils";
 
 describe("Integration tests", () => {
   it("loads aws secrets manager config", async () => {
@@ -15,18 +18,11 @@ describe("Integration tests", () => {
       send: mockSend,
     } as any;
 
-    const configLoader = confconf<{
-      a: string;
-      b: number;
-    }>({
-      schema: {
-        type: "object",
-        properties: {
-          a: { type: "string" },
-          b: { type: "number" },
-        },
-        required: ["a", "b"],
-      },
+    const configLoader = typeboxConfconf({
+      schema: Type.Object({
+        a: Type.String(),
+        b: Type.Number(),
+      }),
       providers: [
         awsSecretsManagerConfig({
           client: mockClient,
@@ -53,14 +49,10 @@ describe("Integration tests", () => {
       },
     });
 
-    const configLoader = confconf<any>({
-      schema: {
-        type: "object",
-        properties: {
-          a: { type: "string" },
-        },
-        required: ["a"],
-      },
+    const configLoader = typeboxConfconf({
+      schema: Type.Object({
+        a: Type.String(),
+      }),
       providers: [
         staticConfig({
           a: "hello",
