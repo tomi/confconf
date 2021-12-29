@@ -26,47 +26,7 @@ The library is used as follows:
 
 ### With [TypeBox](https://github.com/sinclairzx81/typebox)
 
-```ts
-import { confconf, envConfig, ConfconfOpts } from "@confconf/confconf";
-import { Static, Type, TSchema as TTypeboxSchema } from "@sinclair/typebox";
-
-// This integrates typebox with confconf. This way the configuration
-// type can be inferred directly from the schema.
-export const typeboxConfconf = <TSchema extends TTypeboxSchema>(opts: ConfconfOpts<TSchema>) =>
-  confconf<Static<TSchema>, TSchema>(opts);
-
-// Define a schema
-const configSchema = Type.Object({
-  port: Type.Number(),
-  db: Type.Object({
-    host: Type.String(),
-    name: Type.String(),
-  }),
-});
-
-type Config = Static<typeof configSchema>;
-
-// Create the configuration loader
-const configLoader = typeboxConfconf({
-  schema: configSchema,
-  providers: [
-    // Load from env variables
-    envConfig({
-      // Map the specifc env variables into a specific structure
-      structure: {
-        port: "PORT",
-        db: {
-          host: "DB_HOST",
-          name: "DB_NAME",
-        },
-      },
-    }),
-  ],
-});
-
-// Load configuration and validate it against the schema
-const config = await configLoader.loadAndValidate();
-```
+Use [`@confconf/confconf-typebox`](https://github.com/tomi/confconf/tree/main/packages/confconf-typebox)
 
 ### With [purify-ts](https://gigobyte.github.io/purify/)
 

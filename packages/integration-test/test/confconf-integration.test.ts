@@ -1,8 +1,5 @@
 import { confconf, envConfig, staticConfig, devOnlyConfig } from "@confconf/confconf";
-import { Type } from "@sinclair/typebox";
 import { Codec, number, string } from "purify-ts/Codec";
-
-import { typeboxConfconf } from "./testUtils";
 
 import type { ConfconfOpts } from "@confconf/confconf";
 import type { JSONSchema6 } from "json-schema";
@@ -107,33 +104,6 @@ describe("Integration tests", () => {
       expect(config).toEqual({
         a: "hello",
       });
-    });
-  });
-
-  describe("typebox integration", () => {
-    it("works with typebox", async () => {
-      const configLoader = typeboxConfconf({
-        schema: Type.Object({
-          a: Type.String(),
-          b: Type.Number(),
-        }),
-        providers: [
-          staticConfig({
-            a: "hello",
-            b: "10",
-          }),
-        ],
-      });
-
-      const config = await configLoader.loadAndValidate();
-      expect(config).toEqual({
-        a: "hello",
-        b: 10,
-      });
-
-      // typescript checks
-      config.a;
-      config.b;
     });
   });
 

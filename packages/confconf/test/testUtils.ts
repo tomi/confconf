@@ -1,12 +1,8 @@
 import { confconf } from "../src";
 
 import type { ConfconfOpts } from "../src";
-import type { Static, TSchema as TTypeboxSchema } from "@sinclair/typebox";
 import type { JSONSchema6 } from "json-schema";
 import type { Codec, GetType } from "purify-ts";
-
-export const typeboxConfconf = <TSchema extends TTypeboxSchema>(opts: ConfconfOpts<TSchema>) =>
-  confconf<Static<TSchema>, TSchema>(opts);
 
 export type PurifyConfconfOpts<T> = ConfconfOpts<Codec<T>>;
 
