@@ -30,53 +30,7 @@ Use [`@confconf/confconf-typebox`](https://github.com/tomi/confconf/tree/main/pa
 
 ### With [purify-ts](https://gigobyte.github.io/purify/)
 
-```ts
-import { confconf, envConfig, ConfconfOpts } from "@confconf/confconf";
-import { Codec, number, string, GetType } from "purify-ts";
-import type { JSONSchema6 } from "json-schema";
-
-// This integrates purify-ts with confconf. This way the configuration
-// type can be inferred directly from the codec.
-export type PurifyConfconfOpts<T> = ConfconfOpts<Codec<T>>;
-
-export const purifyConfconf = <T>(opts: PurifyConfconfOpts<T>) =>
-  confconf<GetType<Codec<T>>, JSONSchema6>({
-    ...opts,
-    schema: opts.schema.schema(),
-  });
-
-// Define a schema
-const configSchema = Codec.interface({
-  port: number,
-  db: Codec.interface({
-    host: string,
-    name: string,
-  }),
-});
-
-type Config = GetType<typeof configSchema>;
-
-// Create the configuration loader
-const configLoader = purifyConfconf({
-  schema: configSchema,
-  providers: [
-    // Load from env variables
-    envConfig({
-      // Map the specifc env variables into a specific structure
-      structure: {
-        port: "PORT",
-        db: {
-          host: "DB_HOST",
-          name: "DB_NAME",
-        },
-      },
-    }),
-  ],
-});
-
-// Load configuration and validate it against the schema
-const config = await configLoader.loadAndValidate();
-```
+Use [`@confconf/confconf-purify`](https://github.com/tomi/confconf/tree/main/packages/confconf-purify)
 
 ### With plain JSON schema
 

@@ -1,0 +1,38 @@
+{
+  "name": "@confconf/confconf-purify",
+  "version": "1.2.2",
+  "description": "Integrates @confconf/confconf with purify-ts",
+  "keywords": [
+    "confconf",
+    "purify-ts",
+    "typescript",
+    "json-schema"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Tomi Turtiainen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomi/confconf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tomi/confconf/issues"
+  },
+  "homepage": "https://github.com/tomi/confconf/tree/main/packages/confconf-purify#readme",
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@confconf/confconf": "1.2.2"
+  },
+  "peerDependencies": {
+    "purify-ts": ">=1.0.0"
+  }
+}

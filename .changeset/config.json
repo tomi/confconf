@@ -2,7 +2,7 @@
   "$schema": "https://unpkg.com/@changesets/config@1.6.3/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "linked": [["@confconf/confconf", "@confconf/confconf-typebox"]],
+  "linked": [["@confconf/confconf", "@confconf/confconf-typebox", "@confconf/confconf-purify"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
