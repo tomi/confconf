@@ -4,6 +4,7 @@ describe("mergeDeep", () => {
   it("merges two objects", () => {
     expect(
       mergeDeep(
+        undefined,
         {},
         {
           a: 1,
@@ -22,6 +23,7 @@ describe("mergeDeep", () => {
   it("skips undefined values", () => {
     expect(
       mergeDeep(
+        undefined,
         {},
         {
           a: 1,

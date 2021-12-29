@@ -52,9 +52,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.6.3"
+    "ajv": "^8.6.3",
+    "debug": "^4.3.3"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
     "@types/node": "^16.11.6"
   },
   "publishConfig": {

@@ -1,4 +1,5 @@
 import Ajv from "ajv";
+import { debug } from "debug";
 
 import { deepFreeze } from "./utils/deepFreeze";
 import { mergeDeep } from "./utils/deepMerge";
@@ -19,6 +20,8 @@ const ajv = new Ajv({
   "kind",
   "modifier",
 ]);
+
+const debugLogger = debug("confconf");
 
 export interface ConfconfOpts<TSchema extends Schema> {
   /**
@@ -61,18 +64,31 @@ class Confconf<TConfig = any, TSchema = any> {
       this.providers.map((p) => this.loadProviderConfig(p)),
     );
 
-    const mergedConfig = mergeDeep({}, ...providedConfigs);
+    const mergedConfig = mergeDeep(debugLogger, {}, ...providedConfigs);
 
-    if (this.validator(mergedConfig)) {
-      return this.freeze ? deepFreeze(mergedConfig) : mergedConfig;
+    debugLogger("validating configuration");
+
+    if (!this.validator(mergedConfig)) {
+      debugLogger("configuration validation failed with errors %O", this.validator.errors);
+      throw new ValidationError(this.validator.errors ?? []);
     }
 
-    throw new ValidationError(this.validator.errors ?? []);
+    debugLogger("configuration validation succeeded. Configuration is now %O", mergedConfig);
+
+    if (this.freeze) {
+      debugLogger("freezing configuration");
+      return deepFreeze(mergedConfig);
+    } else {
+      return mergedConfig;
+    }
   }
 
   private async loadProviderConfig(provider: ConfigProvider) {
     try {
-      return await provider.load();
+      debugLogger(`loading configuration from ${provider.name}`);
+      const loadedConfig = await provider.load();
+      debugLogger(`configuration loaded from ${provider.name}: %O`, loadedConfig);
+      return loadedConfig;
     } catch (error) {
       console.error(`Failed to load config from ${provider.name}: ${error}`);
     }
