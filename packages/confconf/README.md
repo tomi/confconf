@@ -145,6 +145,18 @@ After the configuration is loaded and merged, it is validated against the provid
 
 See [Ajv's type coercion rules](https://ajv.js.org/coercion.html) for more details how the type coercion works.
 
+## Debugging
+
+Confconf uses [`debug`](https://github.com/debug-js/debug) to provide debug logging. Debug logging can be enabled by setting `DEBUG=confconf` env variable.
+
+```bash
+DEBUG=confconf node app.js
+```
+
+Example of how the logs look like:
+
+![Example how debug logging looks like](./../../images/debug-logging-example.png)
+
 ## Providers
 
 confconf is bundled with the following providers:

@@ -40,7 +40,7 @@ class EnvConfig implements ConfigProvider {
     const { prefix } = this.opts;
 
     if (!prefix) {
-      return mergeDeep<Env>({}, process.env);
+      return mergeDeep<Env>(undefined, {}, process.env);
     }
 
     return Object.keys(process.env)
