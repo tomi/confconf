@@ -1,6 +1,6 @@
 {
   "name": "@confconf/confconf-typebox",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Integrates @confconf/confconf with @sinclair/typebox",
   "keywords": [
     "confconf",
@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@confconf/confconf": "2.0.0"
+    "@confconf/confconf": "2.0.1"
   },
   "peerDependencies": {
     "@sinclair/typebox": ">=0.23.0"

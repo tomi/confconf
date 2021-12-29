@@ -1,5 +1,11 @@
 # @confconf/confconf
 
+## 2.0.1
+
+### Patch Changes
+
+- 8b8dc64: fix ERR_PACKAGE_PATH_NOT_EXPORTED runtime error
+
 ## 2.0.0
 
 ### Major Changes
