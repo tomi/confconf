@@ -5,6 +5,8 @@ import type { ConfigProvider } from "../configProvider";
  * as a parameter to the provider.
  */
 class StaticConfig<T> implements ConfigProvider {
+  public readonly name = "StaticConfig";
+
   private readonly staticConfig: Promise<T>;
 
   constructor(config: T) {

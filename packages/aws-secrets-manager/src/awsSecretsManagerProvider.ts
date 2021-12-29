@@ -56,6 +56,8 @@ export interface AwsSecretsManagerProviderOptsSecret extends AwsSecretsManagerPr
 export type AwsSecretsManagerProviderOpts = AwsSecretsManagerProviderOptsSecret;
 
 export class AwsSecretsManagerProvider<T = unknown> implements ConfigProvider {
+  public readonly name = "AwsSecretsManager";
+
   private readonly client: SecretsManagerClient;
   private readonly secretToLoad?: SingleSecretConfig;
   constructor(opts: AwsSecretsManagerProviderOpts) {
