@@ -43,7 +43,6 @@
   "scripts": {
     "build": "tsc -p .",
     "clean": "rimraf dist && rm -f tsconfig.ref.tsbuildinfo",
-    "prepublishOnly": "npm run clean && npm run build && npm run test",
     "test": "jest",
     "test:ci": "jest --ci",
     "test:watch": "jest --watch"
