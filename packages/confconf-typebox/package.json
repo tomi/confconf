@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/tomi/confconf/tree/main/packages/confconf-typebox#readme",
   "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf dist && rm -f tsconfig.ref.tsbuildinfo",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
     "test": "jest",
     "test:ci": "jest --ci",
     "test:watch": "jest --watch"
@@ -34,5 +37,8 @@
   },
   "peerDependencies": {
     "@sinclair/typebox": ">=0.23.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

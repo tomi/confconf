@@ -1,5 +1,5 @@
 import { awsSecretsManagerConfig } from "../src";
-import { createAwsClientMock } from "./__mocks__/awsClientMock";
+import { createAwsClientMock } from "./mocks/awsClientMock";
 
 import type { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
 
@@ -21,7 +21,7 @@ describe("awsSecretsManagerConfig", () => {
 
         const loadedSecret = await loader.load();
 
-        expect(loadedSecret).toEqual("secret value");
+        expect(loadedSecret).toBe("secret value");
       });
 
       it("sends correct command to the client", () => {
@@ -77,7 +77,7 @@ describe("awsSecretsManagerConfig", () => {
 
         const loadedSecret = await loader.load();
 
-        expect(loadedSecret).toEqual("secret value");
+        expect(loadedSecret).toBe("secret value");
       });
 
       it("sends correct command to the client", () => {
@@ -112,7 +112,7 @@ describe("awsSecretsManagerConfig", () => {
 
         const loadedSecret = await loader.load();
 
-        expect(loadedSecret).toEqual("secret value");
+        expect(loadedSecret).toBe("secret value");
       });
 
       it("sends correct command to the client", () => {
@@ -147,7 +147,7 @@ describe("awsSecretsManagerConfig", () => {
 
         const loadedSecret = await loader.load();
 
-        expect(loadedSecret).toEqual("secret value");
+        expect(loadedSecret).toBe("secret value");
       });
 
       it("sends correct command to the client", () => {
@@ -181,12 +181,12 @@ describe("awsSecretsManagerConfig", () => {
 
         const loadedSecret = await loader.load();
 
-        expect(loadedSecret).toEqual("hijacked secret");
+        expect(loadedSecret).toBe("hijacked secret");
 
         expect(mockTransform).toHaveBeenCalledTimes(1);
 
         const args = mockTransform.mock.calls[0] as any;
-        expect(args[0]).toEqual("secret value");
+        expect(args[0]).toBe("secret value");
       });
 
       it("sends correct command to the client", () => {

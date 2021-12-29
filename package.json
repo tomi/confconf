@@ -5,10 +5,9 @@
     "./packages/*"
   ],
   "scripts": {
-    "commit": "cz",
     "test": "npm run test --workspaces",
     "test:ci": "npm run test:ci --workspaces",
-    "clean": "tsc --build --clean",
+    "clean": "npm run clean --workspaces",
     "build": "tsc --build",
     "watch": "tsc --build --watch",
     "lint": "eslint . --max-warnings=0 --ext .ts",

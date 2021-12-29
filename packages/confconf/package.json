@@ -41,6 +41,9 @@
   },
   "homepage": "https://github.com/tomi/confconf/tree/main/packages/confconf#readme",
   "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf dist && rm -f tsconfig.ref.tsbuildinfo",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
     "test": "jest",
     "test:ci": "jest --ci",
     "test:watch": "jest --watch"
@@ -51,5 +54,8 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

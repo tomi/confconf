@@ -5,6 +5,8 @@
   "description": "NPM module usage tests",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf coverage && rimraf dist",
     "test": "jest",
     "test:ci": "jest --ci",
     "test:watch": "jest --watch"
