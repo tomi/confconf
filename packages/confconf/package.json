@@ -39,7 +39,7 @@
   "bugs": {
     "url": "https://github.com/tomi/confconf/issues"
   },
-  "homepage": "https://github.com/tomi/confconf/tree/main/packages/confconf",
+  "homepage": "https://github.com/tomi/confconf/tree/main/packages/confconf#readme",
   "scripts": {
     "test": "jest",
     "test:ci": "jest --ci",
