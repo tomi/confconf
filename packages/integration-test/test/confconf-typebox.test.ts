@@ -1,5 +1,6 @@
 import { confconf, staticConfig } from "@confconf/confconf-typebox";
 import { Type } from "@sinclair/typebox";
+import * as assert from "assert";
 
 describe("confconf-typebox", () => {
   it("works with typebox", async () => {
@@ -23,7 +24,7 @@ describe("confconf-typebox", () => {
     });
 
     const config = await configLoader.loadAndValidate();
-    expect(config).toEqual({
+    assert.deepStrictEqual(config, {
       a: "hello",
       b: 10,
       c: {

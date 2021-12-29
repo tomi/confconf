@@ -1,9 +1,5 @@
 import { confconf, envConfig, staticConfig, devOnlyConfig } from "@confconf/confconf";
-import { Codec, number, string } from "purify-ts/Codec";
-
-import type { ConfconfOpts } from "@confconf/confconf";
-import type { JSONSchema6 } from "json-schema";
-import type { GetType } from "purify-ts";
+import * as assert from "assert";
 
 describe("Integration tests", () => {
   describe("core providers", () => {
@@ -31,7 +27,7 @@ describe("Integration tests", () => {
       });
 
       const config = await configLoader.loadAndValidate();
-      expect(config).toEqual({
+      assert.deepStrictEqual(config, {
         a: "hello",
         b: 10,
       });
@@ -72,7 +68,7 @@ describe("Integration tests", () => {
       });
 
       const config = await configLoader.loadAndValidate();
-      expect(config).toEqual({
+      assert.deepStrictEqual(config, {
         a: "hello",
         b: 10,
       });
@@ -101,44 +97,9 @@ describe("Integration tests", () => {
       });
 
       const config = await configLoader.loadAndValidate();
-      expect(config).toEqual({
+      assert.deepStrictEqual(config, {
         a: "hello",
       });
-    });
-  });
-
-  describe("purify-ts integration", () => {
-    type PurifyConfconfOpts<T> = ConfconfOpts<Codec<T>>;
-
-    const purifyConfconf = <T>(opts: PurifyConfconfOpts<T>) =>
-      confconf<GetType<Codec<T>>, JSONSchema6>({
-        ...opts,
-        schema: opts.schema.schema(),
-      });
-
-    it("works with purify-ts", async () => {
-      const configLoader = purifyConfconf({
-        schema: Codec.interface({
-          a: string,
-          b: number,
-        }),
-        providers: [
-          staticConfig({
-            a: "hello",
-            b: "10",
-          }),
-        ],
-      });
-
-      const config = await configLoader.loadAndValidate();
-      expect(config).toEqual({
-        a: "hello",
-        b: 10,
-      });
-
-      // typescript checks
-      config.a;
-      config.b;
     });
   });
 });
