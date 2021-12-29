@@ -78,6 +78,8 @@ class Confconf<TConfig = any, TSchema = any> {
   }
 }
 
+export type { Confconf };
+
 export type ConfconfFn = {
   <T = any>(opts: ConfconfOpts<JSONSchemaType<T>>): Confconf<T, JSONSchemaType<T>>;
   <TConfig, TSchema extends Schema>(opts: ConfconfOpts<TSchema>): Confconf<TConfig, TSchema>;
