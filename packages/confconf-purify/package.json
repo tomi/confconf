@@ -1,6 +1,6 @@
 {
   "name": "@confconf/confconf-purify",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Integrates @confconf/confconf with purify-ts",
   "keywords": [
     "confconf",
@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@confconf/confconf": "2.1.0"
+    "@confconf/confconf": "2.2.0"
   },
   "peerDependencies": {
     "purify-ts": ">=1.0.0"

@@ -1,5 +1,16 @@
 # @confconf/confconf-purify
 
+## 2.2.0
+
+### Minor Changes
+
+- 8f40d88: add debug logging support
+
+### Patch Changes
+
+- Updated dependencies [8f40d88]
+  - @confconf/confconf@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes

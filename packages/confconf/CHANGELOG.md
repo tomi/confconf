@@ -1,5 +1,11 @@
 # @confconf/confconf
 
+## 2.2.0
+
+### Minor Changes
+
+- 8f40d88: add debug logging support
+
 ## 2.1.0
 
 ### Minor Changes
