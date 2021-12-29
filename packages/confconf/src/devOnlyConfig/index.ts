@@ -1,6 +1,8 @@
 import type { ConfigProvider } from "../configProvider";
 
 class DevOnlyConfig<T> implements ConfigProvider {
+  public readonly name = "DevOnlyConfig";
+
   private readonly devConfig: Promise<T>;
 
   constructor(config: T) {

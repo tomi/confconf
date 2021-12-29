@@ -25,6 +25,8 @@ export interface EnvConfigOpts {
 type Env = Record<string, string | undefined>;
 
 class EnvConfig implements ConfigProvider {
+  public readonly name = "EnvConfig";
+
   constructor(private readonly opts: EnvConfigOpts = {}) {}
 
   load(): Promise<unknown> {

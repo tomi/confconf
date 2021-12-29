@@ -73,7 +73,7 @@ class Confconf<TConfig = any, TSchema = any> {
     try {
       return await provider.load();
     } catch (error) {
-      console.error(`Failed to load config from provider ${provider}: ${error}`);
+      console.error(`Failed to load config from ${provider.name}: ${error}`);
     }
   }
 }

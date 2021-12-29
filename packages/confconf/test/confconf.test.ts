@@ -298,6 +298,7 @@ describe("confconf", () => {
 
   describe("error cases", () => {
     const failProvider: ConfigProvider = {
+      name: "fail",
       load: () => {
         throw new Error();
       },

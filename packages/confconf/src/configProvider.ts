@@ -3,6 +3,8 @@
  * from some source
  */
 export interface ConfigProvider {
+  readonly name: string;
+
   /**
    * Load configuration from the provider's source
    */
