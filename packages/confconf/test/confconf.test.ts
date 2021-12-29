@@ -1,6 +1,6 @@
-import { confconf, staticConfig } from "../src";
+import { confconf, isValidationError, staticConfig } from "../src";
 
-import type { ConfigProvider } from "../src";
+import type { ConfigProvider, ValidationError } from "../src";
 import type { JSONSchemaType } from "ajv";
 
 type Config = {
@@ -108,7 +108,7 @@ describe("confconf", () => {
       });
 
       await expect(() => config.loadAndValidate()).rejects.toThrowErrorMatchingInlineSnapshot(
-        `"Configuration validation failed: must have required property 'b'"`,
+        `"Configuration validation failed: {\\"/\\": \\"must have required property 'b'\\"}"`,
       );
     });
   });
@@ -320,6 +320,41 @@ describe("confconf", () => {
         a: "hello",
         b: "config",
       });
+    });
+
+    it("throws validation error if validation fails", async () => {
+      let error = null;
+
+      try {
+        await confconf<{ a: string }>({
+          schema: {
+            type: "object",
+            properties: { a: { type: "string" } },
+            required: ["a"],
+          },
+          providers: [],
+        }).loadAndValidate();
+      } catch (e) {
+        error = e as ValidationError;
+      }
+
+      expect(isValidationError(error)).toBe(true);
+      expect(error?.message).toMatchInlineSnapshot(
+        `"Configuration validation failed: {\\"/\\": \\"must have required property 'a'\\"}"`,
+      );
+      expect(error?.validationErrors).toMatchInlineSnapshot(`
+        Array [
+          Object {
+            "instancePath": "",
+            "keyword": "required",
+            "message": "must have required property 'a'",
+            "params": Object {
+              "missingProperty": "a",
+            },
+            "schemaPath": "#/required",
+          },
+        ]
+      `);
     });
   });
 });
