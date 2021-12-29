@@ -1,5 +1,13 @@
-import { confconf, envConfig, staticConfig, devOnlyConfig } from "@confconf/confconf";
+import {
+  confconf,
+  envConfig,
+  staticConfig,
+  devOnlyConfig,
+  isValidationError,
+} from "@confconf/confconf";
 import * as assert from "assert";
+
+import type { ConfigProvider, ErrorObject } from "@confconf/confconf";
 
 describe("Integration tests", () => {
   describe("core providers", () => {
@@ -100,6 +108,38 @@ describe("Integration tests", () => {
       assert.deepStrictEqual(config, {
         a: "hello",
       });
+    });
+  });
+
+  describe("error checking", () => {
+    it("throws ValidationError that can be checked with isValidationError", async () => {
+      let error: any = null;
+
+      try {
+        await confconf({
+          providers: [],
+          schema: { type: "object", properties: { a: { type: "string" } }, required: ["a"] },
+        }).loadAndValidate();
+      } catch (e) {
+        error = e;
+      }
+
+      assert.strictEqual(
+        isValidationError(error),
+        true,
+        "error should be instanceof ValidationError",
+      );
+    });
+  });
+
+  describe("exported types", () => {
+    it("exports certain types", () => {
+      // typescript checks
+      const a: ErrorObject = {} as any;
+      a.message;
+
+      const b: ConfigProvider = {} as any;
+      b.name;
     });
   });
 });

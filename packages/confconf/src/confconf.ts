@@ -8,6 +8,7 @@ import type { ConfigProvider } from "./configProvider";
 import type { Schema, ValidateFunction, JSONSchemaType } from "ajv";
 
 const ajv = new Ajv({
+  allErrors: true,
   strict: true,
   coerceTypes: true,
   removeAdditional: "all",
