@@ -1,5 +1,23 @@
 # @confconf/confconf-typebox
 
+## 2.1.0
+
+### Minor Changes
+
+- 1dbe80f: add name for configuration providers
+
+### Patch Changes
+
+- 0627bcd: validate whole schema instead of returning first error
+- c6de94d: improve validation error messages
+- 0627bcd: export ErrorObject type
+- 0627bcd: add isValidationError type guard function
+
+  This allows checking if throw error is of a type ValidationError
+
+- Updated dependencies [0627bcd]
+  - @confconf/confconf@2.1.0
+
 ## 2.0.1
 
 ### Patch Changes
