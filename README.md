@@ -7,6 +7,7 @@ This repository is a monorepo for the following packages managed with [NPM works
 ## Packages
 
 - [@confconf/confconf](/packages/confconf) : the main package
+- [@confconf/aws-secrets-manager](/packages/aws-secrets-manager) : AWS Secrets Manager configuration provider
 
 ## Contributing
 
