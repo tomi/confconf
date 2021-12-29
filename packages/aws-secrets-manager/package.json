@@ -39,8 +39,7 @@
     "test:watch": "jest --watch"
   },
   "peerDependencies": {
-    "@aws-sdk/client-secrets-manager": "^3.40.0",
-    "@confconf/confconf": "^2.0.0"
+    "@aws-sdk/client-secrets-manager": "^3.40.0"
   },
   "license": "MIT",
   "bugs": {
