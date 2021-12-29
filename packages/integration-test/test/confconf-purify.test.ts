@@ -1,4 +1,5 @@
 import { confconf, staticConfig } from "@confconf/confconf-purify";
+import * as assert from "assert";
 import { Codec, string, number, array, boolean } from "purify-ts/Codec";
 
 describe("confconf-purify", () => {
@@ -23,7 +24,7 @@ describe("confconf-purify", () => {
     });
 
     const config = await configLoader.loadAndValidate();
-    expect(config).toEqual({
+    assert.deepStrictEqual(config, {
       a: "hello",
       b: 10,
       c: {

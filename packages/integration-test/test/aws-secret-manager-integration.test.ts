@@ -2,10 +2,12 @@ import { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
 import { awsSecretsManagerConfig } from "@confconf/aws-secrets-manager";
 import { confconf, staticConfig } from "@confconf/confconf-typebox";
 import { Type } from "@sinclair/typebox";
+import * as assert from "assert";
+import * as sinon from "sinon";
 
 describe("Integration tests", () => {
   it("loads aws secrets manager config", async () => {
-    const mockSend = jest.fn(() => ({
+    const mockSend = sinon.fake(() => ({
       ARN: "arn:aws:secretsmanager:eu-north-1:012345678901:secret:my/secret-9UQJHc",
       Name: "my/secret",
       CreatedDate: new Date(),
@@ -33,7 +35,7 @@ describe("Integration tests", () => {
     });
 
     const config = await configLoader.loadAndValidate();
-    expect(config).toEqual({
+    assert.deepStrictEqual(config, {
       a: "hello",
       b: 10,
     });
@@ -65,7 +67,7 @@ describe("Integration tests", () => {
     });
 
     const config = await configLoader.loadAndValidate();
-    expect(config).toEqual({
+    assert.deepStrictEqual(config, {
       a: "hello",
     });
   });
