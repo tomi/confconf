@@ -18,6 +18,9 @@
   "module": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./dist/devOnlyConfig": "./dist/devOnlyConfig/index.js",
+    "./dist/envConfig": "./dist/envConfig/index.js",
+    "./dist/staticConfig": "./dist/staticConfig/index.js",
     "./package.json": "./package.json"
   },
   "typings": "dist/index.d.ts",
