@@ -1,6 +1,6 @@
 {
   "name": "@confconf/dotenv",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": ".env file configuration provider for confconf",
   "keywords": [
     "dotenv",
