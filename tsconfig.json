@@ -12,6 +12,9 @@
     },
     {
       "path": "./packages/aws-secrets-manager/tsconfig.ref.json"
+    },
+    {
+      "path": "./packages/dotenv/tsconfig.ref.json"
     }
   ]
 }

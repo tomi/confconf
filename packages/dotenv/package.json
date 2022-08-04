@@ -1,0 +1,56 @@
+{
+  "name": "@confconf/dotenv",
+  "version": "0.1.0",
+  "description": ".env file configuration provider for confconf",
+  "keywords": [
+    "dotenv",
+    "env",
+    ".env",
+    "environment",
+    "variables",
+    "conf",
+    "config",
+    "configuration"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "/*": [
+        "dist/*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Tomi Turtiainen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomi/confconf.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf dist && rm -f tsconfig.ref.tsbuildinfo",
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomi/confconf/issues"
+  },
+  "homepage": "https://github.com/tomi/confconf/tree/main/packages/dotenv",
+  "publishConfig": {
+    "access": "public"
+  }
+}

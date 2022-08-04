@@ -10,6 +10,7 @@ This repository is a monorepo for the following packages managed with [NPM works
 - [@confconf/confconf-purify](/packages/confconf-purify) : integrates confconf with [`purify-ts`](https://github.com/gigobyte/purify)
 - [@confconf/confconf-typebox](/packages/confconf-typebox) : integrates confconf with [`@sinclair/typebox`](https://github.com/sinclairzx81/typebox)
 - [@confconf/aws-secrets-manager](/packages/aws-secrets-manager) : AWS Secrets Manager configuration provider
+- [@confconf/dotenv](/packages/dotenv) : `.env` file configuration provider
 
 ## Contributing
 
