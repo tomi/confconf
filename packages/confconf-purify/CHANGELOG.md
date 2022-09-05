@@ -1,5 +1,12 @@
 # @confconf/confconf-purify
 
+## 2.2.1
+
+### Patch Changes
+
+- Updated dependencies [2957430]
+  - @confconf/confconf@2.2.1
+
 ## 2.2.0
 
 ### Minor Changes

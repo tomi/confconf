@@ -1,5 +1,11 @@
 # @confconf/confconf
 
+## 2.2.1
+
+### Patch Changes
+
+- 2957430: Fix types for typescript 4.8
+
 ## 2.2.0
 
 ### Minor Changes
