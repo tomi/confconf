@@ -43,7 +43,8 @@ export interface ConfconfOpts<TSchema extends Schema> {
   freezeConfig?: boolean;
 }
 
-class Confconf<TConfig = any, TSchema = any> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+class Confconf<TConfig = any, TSchema extends {} = any> {
   private readonly freeze: boolean;
   private readonly providers: ConfigProvider[];
   private readonly validator: ValidateFunction<TConfig>;
